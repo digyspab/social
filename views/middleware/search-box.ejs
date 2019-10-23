@@ -1,0 +1,70 @@
+<form>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-12">
+                <input type="search" class="form-control" name="searchTerm" id="searchTerm" autocomplete="off" placeholder="search all users...">
+            </div>
+            <!-- <div class="col-1"> -->
+            <!-- <button id="readButton">search</button> -->
+            <!-- </div> -->
+        </div>
+    </div>
+</form>
+<ul class="list-group list-group-flush" id="results"></ul>
+
+
+
+<script>
+
+    let results = document.getElementById('results');
+
+    searchTerm.addEventListener('keyup', searchFunction);
+
+
+
+    function searchFunction(event) {
+        
+
+        let searchTerm = document.getElementById('searchTerm').value;
+
+        const searchUser = {
+            searchTerm: searchTerm
+        };
+
+        fetch('http://localhost:5000/search/all_users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(searchUser)
+        })
+            // .then((response) => response.json())
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                results.innerHTML = ''
+
+
+                data.forEach((user) => {
+                    if (searchTerm === '') {
+                        results.innerHTML = ''
+                    } else {
+
+                        results.innerHTML +=(
+                            `
+                        <li class="list-group-item">
+                            <img src="../../assets/img/profile/${user.avtar}" height="40" width="40" class="img-thumbnail" /> 
+                            <a href="/search/all_users_profile/${user.id}"> ${user.username} | 
+                                <span class="text-muted"> ${user.email} | ${user.id} </span>
+                            </a>
+                        </li>
+                        `
+                        )
+                    }
+                });
+            });
+
+            event.preventDefault();
+    }
+
+</script>

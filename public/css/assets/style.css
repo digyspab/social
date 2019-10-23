@@ -1,0 +1,164 @@
+
+
+.form-inlines {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-left: 10rem;
+}
+
+.navbar-toggler:focus, .navbar-toggler:active {
+    outline: none;
+    box-shadow: none;
+  }
+
+
+@media screen and (max-width: 600px) {
+    .btn-search-adjust {
+        margin-left: 8px;
+    }
+    .form-inlines {
+        margin: 0;
+    }
+    .login-box {
+        width: 10%;
+        margin: 0;
+        padding: 0;
+     }
+  } 
+
+ .login-box {
+     width: 60%;
+    transform: translate(0, 10%);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+ }
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+
+  /* Nav user-name */
+
+
+  /* LOGIN-REG-BOX */
+
+thead {
+    padding: 0 5px;
+}
+
+/* Search box */
+#results {
+	position: absolute;
+	width: 75%;
+	/* max-width: 80%; */
+	cursor: pointer;
+	overflow-y: auto;
+	max-height: 400px;
+	box-sizing: border-box;
+	z-index: 1001;
+}
+
+@media (min-width: 768px) { 
+	#result {
+		width: 100%;
+	}
+}
+
+    /* Profile */
+.profile_elements {
+    display: inline-flex;
+    align-items: center;
+}
+
+
+
+/* all users_posts */
+.side-all-users-post-image {
+    overflow-y: auto;
+	max-height: 500px;
+	box-sizing: border-box;
+}
+
+
+
+.font_awsome:hover {
+    opacity: 0.6;
+}
+
+#select_image {
+    display: none;
+}
+
+#user_name {
+    text-transform: capitalize;
+}
+
+#user_name:hover {
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.font_awsome {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0 35px 0 0;
+}
+
+.font_awsome_post {
+    cursor: pointer;
+    color: grey;
+    padding: 0 5px;
+}
+
+.fa-edit:hover {
+    color: green;
+}
+
+.fa-remove:hover, .fa-bomb:hover {
+    color: red;
+}
+
+.fa-edit, .fa-remove, .fa-bomb {
+    color: grey;
+    padding-left: 5px;
+}
+
+.fa-edit, .fa-bomb {
+    padding-left: 8px;
+}
+
+
+/* search */
+/* ////////////////////////// */
+#result {
+	position: absolute;
+	width: 100%;
+	max-width: 100%;
+	cursor: pointer;
+	overflow-y: auto;
+	max-height: 400px;
+	box-sizing: border-box;
+	z-index: 1001;
+}
+.link-class:hover{
+	background-color:#f1f1f1;
+}
+
+
+/* table */
+
+
+@media (min-width: 768px) { 
+	#result {
+		width: 98%;
+	}
+}
+
+
