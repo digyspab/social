@@ -1,99 +1,57 @@
 // const db = require('../config/db');
 const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
+const regsitrationValidator = require('./validator');
 
-module.exports =  {
-    activity : (req, res) => {
+module.exports = {
+    activity: (req, res) => {
 
+        // validation checking
+        const illegalChars = /^\w+$/; // allow letters, numbers, and underscores
+        const emailValid = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        const phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+        // get recent date
         let date = new Date(),
-        getFullYear = date.getFullYear(),
-        getMonth = date.getMonth(),
-        getDay = date.getDate(),
+            getFullYear = date.getFullYear(),
+            getMonth = date.getMonth(),
+            getDay = date.getDate(),
 
-        regsiter_date = `${getFullYear}-${getMonth + 1}-${getDay}`;
+            regsiter_date = `${getFullYear}-${getMonth + 1}-${getDay}`;
 
-        let confirmpass = req.body.confirmpass;
-    
-       
-    
         let registerUser = "INSERT INTO `Users` (email, username, password, name, date_created) VALUES(?, ?, ?, ?, ?) ";
         let searchUser = "SELECT username FROM `Users` WHERE username = ? ";
 
-        let registerfieldName = [req.body.name, req.body.username, req.body.email, req.body.password, regsiter_date]
+        let registerfieldName = [req.body.name, req.body.username, req.body.email, req.body.password, regsiter_date];
 
 
-        db.query(searchUser, [req.body], (err, results) => {
-            if(!err) {
-                res.redirect('/users/user_reister');
-            } else {
-                if(err.code == 'ER_PARSE_ERROR') {
+
+
+        db.query(searchUser, [req.body], (err, resultsWithBody) => {
+
+            if (err.code == 'ER_PARSE_ERROR') {
+                
+                db.query(searchUser, [req.body.username], (err, results) => {
                     
-                    handleValidationError(err, req.body);
-                    res.render('layouts/registration', {
-                        title: 'Register Page',
-                        getallFormValue: req.body,
-                    });
-                } else {
+                    if(results.length > 0 || req.body.name == "" || req.body.email == "" || req.body.password == "" || req.body.confirmpass == "") {
+                        regsitrationValidator.handleValidationError(err, req.body, results); // validation function
+                        res.render('layouts/registration', {
+                            title: 'Register Page',
+                            getallFormValue: req.body,
+                        });
+                    } else {
+                        res.redirect('/users/user_login')
+                    }
+                });
+            } 
+            
+            else {
 
-                    res.redirect('/users/user_reister')
-                    console.log("Error while updating: ");
-                }
+                res.redirect('/users/user_reister')
+                console.log("Error while updating: ");
             }
-
         });
-/*         db.query(registerUser, registerfieldName, (err, results) => {
-
-            if(!err) {
-                res.redirect('/users/user_login');
-              
-            } else {
-
-                if(err.code == 'ER_BAD_NULL_ERROR') {
-                    handleValidationError(err, req.body);
-                    res.render('layouts/registration', {
-                        title: '',
-                        getallFormValue: req.body,
-                    })
-    
-                } else {
-                    console.log('error in database' + err)
-                }
-            }
-        }); */
-
     }
 }
-
-function handleValidationError (err, body) {
-    
-    if (Object.keys(body).every(function(x) { return body[x]===''|| body[x]===null;}) === false) {
-         console.log()
-    } else {
-        for(let field in body) {
-
-            console.log(body[field].name)
-            switch (field) {
-                case 'name': 
-                    body['nameError'] = "Name is required";
-                    break;
-                case 'username': 
-                    body['usernameError'] = "Username is required";
-                    break;
-                case 'email': 
-                    body['emailError'] = "Email is required";
-                    break;
-                case 'password': 
-                    body['passwordError'] = "Password is required";
-                    break;
-                case 'confirmpass': 
-                    body['confirmpassError'] = "Confirm password is required";
-                    break;
-                default:
-                    break;
-            }
-        }
-     }
-}
-
 
 // exports.activity=activity;

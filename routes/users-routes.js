@@ -3,7 +3,7 @@ const router = express.Router();
 const users_activity = require('../core/users');
 
 
-router.get('/user_login', (req, res, next) => {
+router.get('/user_login',  (req, res, next) => {
     res.render('layouts/login', {
         title: 'Login Page',
         getallFormValue: '',
