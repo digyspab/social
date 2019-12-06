@@ -1,77 +1,86 @@
 <% include ../index.ejs %>
 
+<div class="mx-auto col-sm-6 mt-3">
 
+    <!-- form user info -->
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-8">
+                    <h4 class="mb-0">User Register </h4>
 
-<div class="container">
-    <div class="row">
+                </div>
+                <div class="col-4">
+                    <span class="float-right"><a href="/users/user_login">Login</a></span>
 
-        <div class="col-1 col-sm-3"></div>
-
-        <div class="col-10 col-sm-6">
-            <div class="card container-fluid h-100 bg-light text-dark">
-                    <!-- <% include ../middleware/messages %> -->
-                    <div class="d-flex align-items-center text-white-50 bg-purple rounded shadow-sm">
-
-                        <h2>Register here</h2>
-        
-                    </div>
-
-                <!-- FORM -->
-                <form action="/users/user_reister" method="POST">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="name">Name</label>
-                            <input type="name" name="name" class="form-control" id="name" placeholder="Enter name" value="<%= getallFormValue.name %>">
-                            <small style="color: red"> <%= getallFormValue.nameError %> </small>
-                        </div>
-                        
-                        <div class="form-group col-md-6">
-                            <label for="username">Username</label>
-                            <input type="text" name="username" class="form-control" id="username"
-                                placeholder="Unique uername" value="<%= getallFormValue.username %>">
-                            <small style="color: red"> <%= getallFormValue.usernameError %> </small>
-                        </div>
-                    </div>
-
-                    <!-- EMAIL -->
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="hyphen.call@gmail.com" value="<%= getallFormValue.email %>">
-                        <small style="color: red"> <%= getallFormValue.emailError %> </small>
-                    </div>
-                    
-                    <!-- PASSWORD -->
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="password">Password</label>
-                            <input type="password" name="password" class="form-control" id="password"
-                                placeholder="Enter password">
-                            <small style="color: red"> <%= getallFormValue.passwordError %> </small>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="confirmPass">Confirm Password</label>
-                            <input type="password" name="confirmpass" class="form-control" id="confirmPass"
-                                placeholder="Confirm Password">
-                            <small style="color: red"> <%= getallFormValue.confirmpassError %> </small>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Sign in</button>
-                </form>
-
-                <!-- END FORM -->
-                <div class="media text-muted pt-3">
-                    <small class="d-block text-right mt-3 pb-4">
-                        <a href="/users/user_login">Already Login </a><span> || <a href="/"> home</a></span>
-                    </small>
                 </div>
             </div>
         </div>
+        <div class="card-body">
 
-        <div class="col-sm-1"></div>
+            <!-- FORM START -->
+            <form class="form" role="form" autocomplete="off" method="POST" action="/users/user_reister">
+                
+                <!-- NAME -->
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" name="name" type="text" placeholder="Enter name" value="<%= getallFormValue.name %>">
+                        <small style="color: red"> <%= getallFormValue.nameError %> </small>
+                    </div>
+                </div>
+                
+                <!-- USERNAME -->
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Username</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" name="username" type="text" placeholder="Enter username" value="<%= getallFormValue.username %>">
+                        <small style="color: red"> <%= getallFormValue.usernameError %> </small>
+                    </div>
+                </div>
 
+                <!-- EMAIL -->
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" name="email" type="email" value=" " placeholder="mail@gmail.com" value="<%= getallFormValue.email %>">
+                        <small style="color: red"> <%= getallFormValue.emailError %> </small>
+                    </div>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" name="password" type="password" placeholder="Enter password">
+                        <small style="color: red"> <%= getallFormValue.passwordError %> </small>
+                    </div>
+                </div>
+
+                <!-- CONFIRM PASSWORD -->
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Confirm Password</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" name="conpassword" type="password" placeholder="Retype password">
+                        <small style="color: red"> <%= getallFormValue.confirmpassError %> </small>
+                    </div>
+                </div>
+
+                <!-- REMEMBER ME -->
+                <div class="checkbox">
+                    <label for="select-checkbox">
+                        <input name="terms" id="select-checkbox" type="checkbox">I have read and agree to the <a href="#">terms of service</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+            <!-- FORM END -->
+
+        </div>
     </div>
 </div>
+
 
 
 <% include ../include/footer %>

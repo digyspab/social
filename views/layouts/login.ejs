@@ -1,51 +1,54 @@
 <% include ../index.ejs %>
-<main role="main" class="container-fluid h-100 bg-light text-dark">
-    <div class="row justify-content-center align-items-center">
-        <div class="my-0 p-3 bg-black rounded shadow-sm login-box">
-           
-            <div class="d-flex align-items-center my-3 text-white-50 bg-purple rounded shadow-sm">
 
-                <h2>Login here</h2>
+<div class="mx-auto col-sm-6 mt-3">
 
+    <!-- form user info -->
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-8">
+                    <h4 class="mb-0">User Register </h4>
+                </div>
+                <div class="col-4">
+                    <span class="float-right"><a href="/users/user_reister">Register</a></span>
+
+                </div>
             </div>
+        </div>
 
-
-            <!-- FORM -->
-            <form class="pt-3" action="/users/user_login" method="POST" enctype="multipart/form-data">
-
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" class="form-control" id="username"
-                        placeholder="Enter unique uername">
-                </div>
-
-                <!-- PASSWORD -->
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" id="password"
-                        placeholder="Enter password">
-                </div>
-
-
-                <!-- REMEMBER ME -->
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                        <label class="form-check-label" for="gridCheck">
-                            Remember me
-                        </label>
+        <div class="card-body">
+            
+            <!-- FORM START -->
+            <form class="form" role="form" autocomplete="off" method="POST" action="/users/user_login">
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Username</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" name="username" type="text" placeholder="enter username">
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Login </button> || <span><a href="/"> home</a></span>
+                <!-- PASSWORD -->
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Password</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" name="password" type="password" placeholder="enter your password">
+                    </div>
+                </div>
+
+                 <!-- REMEMBER ME -->
+                <div class="checkbox">
+                    <label for="select-checkbox">
+                        <input name="terms" id="select-checkbox" type="checkbox">I have read and agree to the <a href="#">terms of service</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign in</button>
+
             </form>
-
-
-            <!-- END FORM -->
+            <!-- FORM END -->
         </div>
     </div>
-
-</main>
+</div>
 
 
 <% include ../include/footer %>

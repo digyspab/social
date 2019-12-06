@@ -6,11 +6,6 @@ const regsitrationValidator = require('./validator');
 module.exports = {
     activity: (req, res) => {
 
-        // validation checking
-        const illegalChars = /^\w+$/; // allow letters, numbers, and underscores
-        const emailValid = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-        const phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-
         // get recent date
         let date = new Date(),
             getFullYear = date.getFullYear(),
@@ -43,9 +38,7 @@ module.exports = {
                         res.redirect('/users/user_login')
                     }
                 });
-            } 
-            
-            else {
+            } else {
 
                 res.redirect('/users/user_reister')
                 console.log("Error while updating: ");
