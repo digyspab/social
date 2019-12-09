@@ -19,17 +19,23 @@ module.exports = {
                     default:
                         break;
                 }
-            } 
-
-            // if (!onlyAlphabet.test(body.name)) { // name field valildation
-            //     switch (field) {
-            //         case 'name':
-            //             body['nameError'] = "Only alphabets";
-            //             break;
-            //         default:
-            //             break;
-            //     }
-            // }
+            } else if (!illegalChars.test(body.name)) {
+                switch (field) {
+                    case 'name':    
+                        body['nameError'] = "Name must be alphanumeric";
+                        break;
+                    default:
+                        break;
+                }
+            } else if ((body.name).length < 5 || (body.username).length > 15) {
+                switch (field) {
+                    case 'name':
+                        body['nameError'] = "Name reange min: 5 and max: 15";
+                        break;
+                    default:
+                        break;
+                }
+            }
             
             if (Object.values(body)[1] == "") { // username field validation 
                 switch (field) {
@@ -99,11 +105,11 @@ module.exports = {
                     default:
                         break;
                 }
-            }
+            } 
             
             if (Object.values(body)[3] !== Object.values(body)[4]) {
                 switch (field) {
-                    case 'confirmpass':
+                    case 'confpassword':
                         body['confirmpassError'] = "Password not match";
                         break;
                     default:

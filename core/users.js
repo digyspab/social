@@ -20,15 +20,13 @@ module.exports = {
         let registerfieldName = [req.body.name, req.body.username, req.body.email, req.body.password, regsiter_date];
 
 
-
-
-        db.query(searchUser, [req.body], (err, resultsWithBody) => {
+        mysqlDB.query(searchUser, [req.body], (err, resultsWithBody) => {
 
             if (err.code == 'ER_PARSE_ERROR') {
                 
-                db.query(searchUser, [req.body.username], (err, results) => {
+                mysqlDB.query(searchUser, [req.body.username], (err, results) => {
                     
-                    if(results.length > 0 || req.body.name == "" || req.body.email == "" || req.body.password == "" || req.body.confirmpass == "") {
+                    if(results.length > 0 || req.body.name == "" || req.body.username == "" || req.body.email == "" || req.body.password == "" || req.body.confpassword == "") {
                         regsitrationValidator.handleValidationError(err, req.body, results); // validation function
                         res.render('layouts/registration', {
                             title: 'Register Page',

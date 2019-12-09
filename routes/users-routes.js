@@ -19,7 +19,6 @@ router.get('/user_reister', (req, res, next) => {
 });
 
 router.post('/user_reister', (req, res, next) => {
-
     
    users_activity.activity(req, res, next);
 

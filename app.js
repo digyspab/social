@@ -6,7 +6,9 @@ const ejs = require('ejs');
 const flash = require('connect-flash');
 
 const keys = require('./config/keys');
-const db = require('./config/db');
+const mysqlDB = require('./config/db/db').mysqlDB();
+const mongoDB = require('./config/db/db').mongoDB();
+
 const app = express();
 
 
