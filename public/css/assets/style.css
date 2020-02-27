@@ -96,9 +96,9 @@ thead {
     display: none;
 }
 
-#user_name {
+/* #user_name {
     text-transform: capitalize;
-}
+} */
 
 #user_name:hover {
     cursor: pointer;

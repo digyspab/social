@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -7,7 +8,7 @@ const flash = require('connect-flash');
 
 const keys = require('./config/keys');
 const mysqlDB = require('./config/db/db').mysqlDB();
-const mongoDB = require('./config/db/db').mongoDB();
+// const mongoDB = require('./config/db/db').mongoDB();
 
 const app = express();
 
@@ -30,6 +31,13 @@ app.use(session({
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
+
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // Connect flash
 app.use(flash());

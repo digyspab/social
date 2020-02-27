@@ -1,17 +1,32 @@
-<% if(typeof error_msg != 'undefined'){ %>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
+<% if(success_msg != '') { %>
+    <!-- <a class="btn btn-success" onclick="toastr.info('Hi! I am info message.');" >  </a> -->
 
-   
+    <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 40px;">
+            <div class="toast" style="position: absolute; top: 0; right: 0;">
+              <div class="toast-header">
+                <img src="../../assets/img/gmail.png" class="rounded mr-2" alt="..." width="20px">
+                <strong class="mr-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="toast-body">
+                    <%= success_msg %>
+              </div>
+            </div>
+          </div>
 
-    <%= error_msg %>
-    </br>
-
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-
-</div>
 <% } %>
+
+
+
+    
+    <script>
+    $(document).ready(function(){
+      $('.toast').toast('show');
+    });
+    </script>
 
 
 

@@ -17,22 +17,32 @@
         </div>
 
         <div class="card-body">
+
             
             <!-- FORM START -->
             <form class="form" role="form" autocomplete="off" method="POST" action="/users/user_login">
+
+                <!-- USERNAME -->
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">Username</label>
                     <div class="col-lg-9">
-                        <input class="form-control" name="username" type="text" placeholder="enter username">
+                        <input class="form-control" name="username" type="text" value="<%= getallFormValue.username %>" placeholder="Enter username">
+                        <small style="color: red"> <%= getallFormValue.usernameError %> </small>
                     </div>
                 </div>
 
                 <!-- PASSWORD -->
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                    <div class="col-lg-9">
-                        <input class="form-control" name="password" type="password" placeholder="enter your password">
+                    <div class="input-group col-lg-9">
+
+                        <input class="form-control border-right-0" id="password" name="password" type="password" value="<%= getallFormValue.password %>" placeholder="Enter password">
+                        <span class="input-group-append bg-white">
+                            <button class="btn border border-left-0" type="button" onclick="myFunction()"><i class="fab fa-expeditedssl"></i></button>
+                        </span>
                     </div>
+                    <small class="col-lg-3"> </small>
+                    <small class="col-lg-9" style="color: red"> <%= getallFormValue.passwordError %> </small>
                 </div>
 
                  <!-- REMEMBER ME -->
@@ -43,7 +53,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Sign in</button>
-
+                <%= getallFormValue.token %>
             </form>
             <!-- FORM END -->
         </div>
@@ -52,3 +62,14 @@
 
 
 <% include ../include/footer %>
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>

@@ -19,32 +19,35 @@
         <div class="card-body">
 
             <!-- FORM START -->
-            <form class="form" role="form" autocomplete="off" method="POST" action="/users/user_reister">
-                
+            <form class="form" role="form" method="POST" action="/users/user_reister" onsubmit="return Validate()" name="RegsiterValidation">
+
                 <!-- NAME -->
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                    <label class="col-lg-3 col-form-label form-control-label" id="name_label">Name</label>
                     <div class="col-lg-9">
-                        <input class="form-control" name="name" type="text" value="<%= getallFormValue.name %>" placeholder="Enter name">
-                        <small style="color: red"> <%= getallFormValue.nameError %> </small>
+                        <input class="form-control" name="name" type="text" value="<%= getallFormValue.name %>"
+                            placeholder="Enter name" style="text-transform: capitalize;">
+                        <small style="color: red" id="name_error"> <%= getallFormValue.nameError %> </small>
                     </div>
                 </div>
-                
+
                 <!-- USERNAME -->
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label">Username</label>
+                    <label class="col-lg-3 col-form-label form-control-label" id="username_label">Username</label>
                     <div class="col-lg-9">
-                        <input class="form-control" name="username" type="text" value="<%= getallFormValue.username %>" placeholder="Enter username">
-                        <small style="color: red"> <%= getallFormValue.usernameError %> </small>
+                        <input class="form-control" name="username" type="text" value="<%= getallFormValue.username %>"
+                            placeholder="Enter username"  style="text-transform: capitalize;">
+                        <small style="color: red" id="username_error"> <%= getallFormValue.usernameError %> </small>
                     </div>
                 </div>
 
                 <!-- EMAIL -->
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                    <label class="col-lg-3 col-form-label form-control-label" >Email</label>
                     <div class="col-lg-9">
-                        <input class="form-control" name="email" type="text" value="<%= getallFormValue.email %>" placeholder="mail@gmail.com">
-                        <small style="color: red"> <%= getallFormValue.emailError %> </small>
+                        <input class="form-control" name="email" type="email" value="<%= getallFormValue.email %>"
+                            placeholder="mail@gmail.com">
+                        <small style="color: red" id="email_error"> <%= getallFormValue.emailError %> </small>
                     </div>
                 </div>
 
@@ -53,28 +56,31 @@
                     <label class="col-lg-3 col-form-label form-control-label">Password</label>
                     <div class="input-group col-lg-9">
 
-                        <input class="form-control border-right-0" id="password" name="password" type="password" value="<%= getallFormValue.password %>" placeholder="Enter password">
+                        <input class="form-control border-right-0" id="password" name="password" type="password"
+                            value="<%= getallFormValue.password %>" placeholder="Enter password">
                         <span class="input-group-append bg-white">
-                            <button class="btn border border-left-0" type="button" onclick="myFunction()"><i class="fab fa-expeditedssl"></i></button>
+                            <button class="btn border border-left-0" type="button" onclick="myFunction()"><i
+                                    class="fab fa-expeditedssl"></i></button>
                         </span>
                     </div>
                     <small class="col-lg-3"> </small>
-                    <small class="col-lg-9" style="color: red"> <%= getallFormValue.passwordError %> </small>
+                    <small class="col-lg-9" style="color: red" id="password_error"> <%= getallFormValue.passwordError %> </small>
                 </div>
 
                 <!-- CONFIRM PASSWORD -->
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label">Confirm Password</label>
+                    <label class="col-lg-3 col-form-label form-control-label" id="confpassword_label">Confirm Password</label>
                     <div class="col-lg-9">
-                        <input class="form-control" name="confpassword" type="password" placeholder="Retype password">
-                        <small style="color: red"> <%= getallFormValue.confirmpassError %> </small>
+                        <input class="form-control" name="confpassword" type="password" value="<%= getallFormValue.confpassword %>" placeholder="Retype password">
+                        <small style="color: red" id="confpassword_error"> <%= getallFormValue.confirmpassError %> </small>
                     </div>
                 </div>
 
                 <!-- REMEMBER ME -->
                 <div class="checkbox">
                     <label for="select-checkbox">
-                        <input name="terms" id="select-checkbox" type="checkbox" onclick="myFunction()">I have read and agree to the <a href="#">terms of service</a>
+                        <input name="terms" id="select-checkbox" type="checkbox" >I have read and
+                        agree to the <a href="#">terms of service</a>
                     </label>
                 </div>
 
@@ -90,13 +96,4 @@
 
 <% include ../include/footer %>
 
-<script>
-        function myFunction() {
-          var x = document.getElementById("password");
-          if (x.type === "password") {
-            x.type = "text";
-          } else {
-            x.type = "password";
-          }
-        }
-        </script>
+<!-- <script src="../../js/assets/formValidation.js"></script> -->

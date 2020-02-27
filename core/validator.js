@@ -1,8 +1,9 @@
 const express = require('express');
 
-
 module.exports = {
-    handleValidationError: (err, body, results) => {
+
+    // Registration Validation
+    registrationValidator: (err, body, results) => {
 
         // validation checking
         // const phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
@@ -11,112 +12,72 @@ module.exports = {
         const onlyAlphabet = /^[a-zA-Z]+$/;
 
         for (let field in body) {
-            if (Object.values(body)[0] == "") { // name field valildation
-                switch (field) {
-                    case 'name':
-                        body['nameError'] = "Name is required";
-                        break;
-                    default:
-                        break;
-                }
-            } else if (!illegalChars.test(body.name)) {
-                switch (field) {
-                    case 'name':    
-                        body['nameError'] = "Name must be alphanumeric";
-                        break;
-                    default:
-                        break;
-                }
+
+            if (body.name == "") { // name field valildation
+                body['nameError'] = "Name is required";
+                
+            } else if (!onlyAlphabet.test(body.name)) {
+
+                body['nameError'] = "Name must be alphabet only";
             } else if ((body.name).length < 5 || (body.username).length > 15) {
-                switch (field) {
-                    case 'name':
-                        body['nameError'] = "Name reange min: 5 and max: 15";
-                        break;
-                    default:
-                        break;
-                }
+
+                body['nameError'] = "Name reange min: 5 and max: 15";
             }
             
-            if (Object.values(body)[1] == "") { // username field validation 
-                switch (field) {
-                    case 'username':
-                        body['usernameError'] = "Username is required";
-                        break;
-                    default:
-                        break;
-                }
+            if (body.username == "") { // username field validation 
+                body['usernameError'] = "Username is required";
+
             } else if (results.length > 0) { 
-                switch (field) {
-                    case 'username':
-                        body['usernameError'] = "Username already exists";
-                        break;
-                    default:
-                        break;
-                }
+                body['usernameError'] = "Username already exists";
+
             } else if (!illegalChars.test(body.username)) {
-                switch (field) {
-                    case 'username':    
-                        body['usernameError'] = "Username must be alphanumeric";
-                        break;
-                    default:
-                        break;
-                }
+                body['usernameError'] = "Username must be alphanumeric";
+
             } else if ((body.username).length < 5 || (body.username).length > 15) {
-                switch (field) {
-                    case 'username':
-                        body['usernameError'] = "Username reange min: 5 and max: 15";
-                        break;
-                    default:
-                        break;
-                }
+                body['usernameError'] = "Username reange min: 5 and max: 15";
+
             }
 
-            if (Object.values(body)[2] == "") { // email field validation
-                switch (field) {
-                    case 'email':
-                        body['emailError'] = "Email is required";
-                        break;
-                    default:
-                        break;
-                }
-            } else if (!emailValid.test(body.email)) { // email field validation
-                switch (field) {
-                    case 'email':
-                        body['emailError'] = "Not a valid email";
-                        break;
-                    default:
-                        break;
-                }
+            if (body.email == "") { // email field validation
+                body['emailError'] = "Email is required";
+
+            } else if (!emailValid.test(body.email)) { 
+                body['emailError'] = "Not a valid email";
+
             }
-            
-            if (Object.values(body)[3] == "") { // password validation
-                switch (field) {
-                    case 'password':
-                        body['passwordError'] = "Password is required";
-                        break;
-                    default:
-                        break;
-                }
-            } else if ((body.password).length <= 5) { // password validation
-                switch (field) {
-                    case 'password':
-                        body['passwordError'] = "Password should be min: 5";
-                        break;
-                    default:
-                        break;
-                }
+
+            if (body.password == "") { // password validation
+                body['passwordError'] = "Password is required";
+
+            } else if ((body.password).length <= 5) {
+                body['passwordError'] = "Password should be min: 5";
+
             } 
-            
-            if (Object.values(body)[3] !== Object.values(body)[4]) {
-                switch (field) {
-                    case 'confpassword':
-                        body['confirmpassError'] = "Password not match";
-                        break;
-                    default:
-                        break;
-                }
+
+            if (body.confpassword == "" || (body.confpassword).length <= 5) {
+                body['confirmpassError'] = "Confrim password is required";
+            } else {
+                body['confirmpassError'] = "Password not match";
             }
         }
 
+    },
+
+
+    // Login Validation
+    loginValidator: (err, body, results) => {
+        if(body.username == "") {
+            body['usernameError'] = "Enter your username";
+        } else if (results.length > 0 && (body.password !== results[0].password)) { 
+            console.log(results[0].username)
+            body['passwordError'] = "Password not match";
+        } else {
+            body['usernameError'] = "Incorrect username";
+        }
+        
+        if(body.password == "") {
+            body['passwordError'] = "Enter your password";
+        } 
     }
+
 }
